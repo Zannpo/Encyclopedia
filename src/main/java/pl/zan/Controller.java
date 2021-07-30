@@ -27,13 +27,13 @@ public class Controller {
         Scanner scan = new Scanner(System.in);
         String decision;
 
-        System.out.println("Wybierz z menu co chcesz zrobić.");
+        System.out.println("Wybierz z menu co chcesz zrobic.");
 
         OUTER:
         while (true) {
-            System.out.println("A)Show everything");
-
-            System.out.println("X)Close program");
+            System.out.println("A)Pokaz wszystko B)Pokaz liste profesji C) Pokaz liste postaci");
+            System.out.println("D)Pokaz postacie wedlug profesji");
+            System.out.println("X)Zamknij menu");
             decision = scan.next();
 
             switch (decision) {
@@ -42,14 +42,37 @@ public class Controller {
                 case "A":
                     System.out.println("Lista istniejacych profesji:");
                     System.out.println();
-
                     professions.stream().forEach(System.out::println);
                     System.out.println();
+
                     System.out.println("Lista istniejacych postaci:");
 
                     characters.stream().forEach(System.out::println);
                     System.out.println();
                     System.out.println("Koniec encyklopedii.");
+                    break;
+                case "B":
+                    System.out.println("Lista istniejacych profesji:");
+                    System.out.println();
+                    professions.stream().forEach(System.out::println);
+                    System.out.println();
+                    break;
+                case "C":
+                    System.out.println("Lista istniejacych postaci:");
+                    characters.stream().forEach(System.out::println);
+                    System.out.println();
+                    break;
+                case "D":
+                    System.out.println("Podaj id profesji");
+                    String professionId = scan.next();
+                    List<Character> charactersByProfession = getCharactersByProfession(Long. parseLong(professionId)) ;
+                    charactersByProfession.stream().forEach(System.out::println);
+                    break;
+                case "E":
+                    System.out.println("Podaj szukane imie");
+                    String name = scan.next();
+                    List<Character> characterByName = getCharacterByName(name) ;
+                    characterByName.stream().forEach(System.out::println);
                     break;
 
             }
@@ -65,10 +88,10 @@ public class Controller {
         ProfessionServices service = getProfessionsServiceImpl();
         try {
             service.addProfession(profession).execute();
-            System.out.println("Profesja dodana pomyślnie!");
+            System.out.println("Profesja dodana pomyslnie!");
         } catch (IOException e) {
 
-            System.out.println("Coś poszło nie tak!");
+            System.out.println("Cos poszlo nie tak!");
             e.printStackTrace();
         }
     }
@@ -80,7 +103,7 @@ public class Controller {
             response = service.getProfessions().execute();
         } catch (IOException e) {
 
-            System.out.println("Coś poszło nie tak!");
+            System.out.println("Cos poszlo nie tak!");
             e.printStackTrace();
         }
         return response.body();
@@ -97,20 +120,46 @@ public class Controller {
             response = service.getCharacter().execute();
         } catch (IOException e) {
 
-            System.out.println("Coś poszło nie tak!");
+            System.out.println("Cos poszlo nie tak!");
             e.printStackTrace();
         }
         return response.body();
+    }
+
+    private List<Character> getCharactersByProfession(long profession) {
+        CharacterServices service = getCharacterServiceImpl();
+        Response<Character> response = null;
+        try {
+            response = service.getCharacterByProfession(profession).execute();
+        } catch (IOException e) {
+
+            System.out.println("Cos poszlo nie tak!");
+            e.printStackTrace();
+        }
+        return (List<Character>) response.body();
+    }
+
+    private List<Character> getCharacterByName(String name) {
+        CharacterServices service = getCharacterServiceImpl();
+        Response<Character> response = null;
+        try {
+            response = service.getCharacterByName(name).execute();
+        } catch (IOException e) {
+
+            System.out.println("Cos poszlo nie tak!");
+            e.printStackTrace();
+        }
+        return (List<Character>) response.body();
     }
 
     private void addCharacter(Character character) {
         CharacterServices service = getCharacterServiceImpl();
         try {
             service.addCharacter(character).execute();
-            System.out.println("Postać dodana pomyślnie!");
+            System.out.println("Postac dodana pomyslnie!");
         } catch (IOException e) {
 
-            System.out.println("Coś poszło nie tak!");
+            System.out.println("Cos poszlo nie tak!");
             e.printStackTrace();
         }
     }
