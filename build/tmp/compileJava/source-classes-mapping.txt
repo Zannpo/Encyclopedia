@@ -1,0 +1,18 @@
+pl/zan/Retrofit.java
+ pl.zan.Retrofit
+pl/zan/CharacterApi.java
+ pl.zan.CharacterApi
+pl/zan/ProfessionServices.java
+ pl.zan.ProfessionServices
+pl/zan/Profession.java
+ pl.zan.Profession
+pl/zan/TheWitcherApplication.java
+ pl.zan.TheWitcherApplication
+pl/zan/Character.java
+ pl.zan.Character
+pl/zan/CharacterServices.java
+ pl.zan.CharacterServices
+pl/zan/ProfessionApi.java
+ pl.zan.ProfessionApi
+pl/zan/Controller.java
+ pl.zan.Controller
