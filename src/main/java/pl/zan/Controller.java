@@ -32,7 +32,7 @@ public class Controller {
         OUTER:
         while (true) {
             System.out.println("A)Pokaz wszystko B)Pokaz liste profesji C) Pokaz liste postaci");
-            System.out.println("D)Pokaz postacie wedlug profesji");
+            System.out.println("D)Wyszukaj postac wedlug imienia");
             System.out.println("X)Zamknij menu");
             decision = scan.next();
 
@@ -40,47 +40,66 @@ public class Controller {
                 case "X":
                     break OUTER;
                 case "A":
-                    System.out.println("Lista istniejacych profesji:");
-                    System.out.println();
-                    professions.stream().forEach(System.out::println);
-                    System.out.println();
+                    try {
 
-                    System.out.println("Lista istniejacych postaci:");
+                        System.out.println("Lista istniejacych profesji:");
+                        System.out.println();
+                        professions.stream().forEach(System.out::println);
+                        System.out.println();
 
-                    characters.stream().forEach(System.out::println);
-                    System.out.println();
-                    System.out.println("Koniec encyklopedii.");
+                        System.out.println("Lista istniejacych postaci:");
+
+                        characters.stream().forEach(System.out::println);
+                        System.out.println();
+                        System.out.println("Koniec encyklopedii.");
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.println("Cos poszlo nie tak!");
+                    }
                     break;
                 case "B":
-                    System.out.println("Lista istniejacych profesji:");
-                    System.out.println();
-                    professions.stream().forEach(System.out::println);
-                    System.out.println();
+                    try{
+                        System.out.println("Lista istniejacych profesji:");
+                        System.out.println();
+                        professions.stream().forEach(System.out::println);
+                        System.out.println();
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.println("Cos poszlo nie tak!");
+                    }
                     break;
                 case "C":
+                    try{
                     System.out.println("Lista istniejacych postaci:");
                     characters.stream().forEach(System.out::println);
                     System.out.println();
+                    }
+                    catch(Exception e)
+                {
+                    System.out.println("Cos poszlo nie tak!");
+                }
                     break;
+
                 case "D":
-                    System.out.println("Podaj id profesji");
-                    String professionId = scan.next();
-                    //List<Character> charactersByProfession = getCharactersByProfession(Long. parseLong(professionId)) ;
-                    //charactersByProfession.stream().forEach(System.out::println);
-                    Character characterByProfession = getCharacterByProfession(Long.parseLong(professionId)) ;
+                    try {
+                        System.out.println("Podaj szukane imie");
+                        String name = scan.next();
+                        Character characterByName = getCharacterByName(name);
+                        System.out.println(characterByName);
+                        System.out.println(name);
+                    }
+                    catch(Exception e)
+                {
+                    System.out.println("Cos poszlo nie tak!");
+                }
                     break;
-                case "E":
-                    System.out.println("Podaj szukane imie");
-                    String name = scan.next();
-                    Character characterByName = getCharacterByName(name) ;
-                    System.out.println(characterByName);
-                    System.out.println(name);
-                    break;
+
 
             }
         }
     }
-
 
     private ProfessionServices getProfessionsServiceImpl() {
         return retrofit.getRetrofit().create(ProfessionServices.class);
@@ -120,19 +139,6 @@ public class Controller {
         Response<List<Character>> response = null;
         try {
             response = service.getCharacter().execute();
-        } catch (IOException e) {
-
-            System.out.println("Cos poszlo nie tak!");
-            e.printStackTrace();
-        }
-        return response.body();
-    }
-
-    private Character getCharacterByProfession(long profession) {
-        CharacterServices service = getCharacterServiceImpl();
-        Response<Character> response = null;
-        try {
-            response = service.getCharacterByProfession(profession).execute();
         } catch (IOException e) {
 
             System.out.println("Cos poszlo nie tak!");

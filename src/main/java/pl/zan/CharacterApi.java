@@ -36,11 +36,6 @@ public class CharacterApi {
         return listOfCharacters;
     }
 
-    @GetMapping("/getCharactersByProfession/{profession}")
-    public Character getCharacter(@PathVariable("profession") long profession) {
-        return listOfCharacters.stream().filter(item -> item.getName().equals(profession)).findAny().get();
-
-    }
 
     @GetMapping("/getCharacterByName/{name}")
     public Character getCharacterByName(@PathVariable("name") String name) {

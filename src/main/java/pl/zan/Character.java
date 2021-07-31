@@ -3,10 +3,10 @@ package pl.zan;
 public class Character {
     private long id;
     private String name;
-    private long profession;
+    private int profession;
 
 
-    public Character(long id, String name, long profession) {
+    public Character(long id, String name, int profession) {
         this.id = id;
         this.name = name;
         this.profession = profession;
@@ -28,11 +28,11 @@ public class Character {
         this.name = name;
     }
 
-    public long getProfession() {
+    public int getProfession() {
         return profession;
     }
 
-    public void setProfession(long profession) {
+    public void setProfession(int profession) {
         this.profession = profession;
     }
 

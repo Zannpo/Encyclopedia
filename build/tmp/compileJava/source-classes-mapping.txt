@@ -8,10 +8,10 @@ pl/zan/Profession.java
  pl.zan.Profession
 pl/zan/TheWitcherApplication.java
  pl.zan.TheWitcherApplication
-pl/zan/Character.java
- pl.zan.Character
 pl/zan/CharacterApi.java
  pl.zan.CharacterApi
+pl/zan/Character.java
+ pl.zan.Character
 pl/zan/CharacterServices.java
  pl.zan.CharacterServices
 pl/zan/Controller.java
