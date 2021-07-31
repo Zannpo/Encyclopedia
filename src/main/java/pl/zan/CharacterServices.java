@@ -14,7 +14,11 @@ public interface CharacterServices {
         @GET("/getCharactersByProfession/{profession}")
         Call<Character> getCharacterByProfession(@Path("profession") long profession);
 
+        @GET("/countCharactersByProfession/{profession}")
+        Call<Character> countCharacterByProfession(@Path("profession") long profession);
+
         @GET("/getCharacterByName/{name}")
         Call<Character> getCharacterByName(@Path("name") String name);
+
 
 }

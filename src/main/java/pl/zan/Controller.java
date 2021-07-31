@@ -65,14 +65,16 @@ public class Controller {
                 case "D":
                     System.out.println("Podaj id profesji");
                     String professionId = scan.next();
-                    List<Character> charactersByProfession = getCharactersByProfession(Long. parseLong(professionId)) ;
-                    charactersByProfession.stream().forEach(System.out::println);
+                    //List<Character> charactersByProfession = getCharactersByProfession(Long. parseLong(professionId)) ;
+                    //charactersByProfession.stream().forEach(System.out::println);
+                    Character characterByProfession = getCharacterByProfession(Long.parseLong(professionId)) ;
                     break;
                 case "E":
                     System.out.println("Podaj szukane imie");
                     String name = scan.next();
-                    List<Character> characterByName = getCharacterByName(name) ;
-                    characterByName.stream().forEach(System.out::println);
+                    Character characterByName = getCharacterByName(name) ;
+                    System.out.println(characterByName);
+                    System.out.println(name);
                     break;
 
             }
@@ -126,7 +128,7 @@ public class Controller {
         return response.body();
     }
 
-    private List<Character> getCharactersByProfession(long profession) {
+    private Character getCharacterByProfession(long profession) {
         CharacterServices service = getCharacterServiceImpl();
         Response<Character> response = null;
         try {
@@ -136,12 +138,13 @@ public class Controller {
             System.out.println("Cos poszlo nie tak!");
             e.printStackTrace();
         }
-        return (List<Character>) response.body();
+        return response.body();
     }
 
-    private List<Character> getCharacterByName(String name) {
+    private Character getCharacterByName(String name) {
         CharacterServices service = getCharacterServiceImpl();
         Response<Character> response = null;
+
         try {
             response = service.getCharacterByName(name).execute();
         } catch (IOException e) {
@@ -149,7 +152,7 @@ public class Controller {
             System.out.println("Cos poszlo nie tak!");
             e.printStackTrace();
         }
-        return (List<Character>) response.body();
+        return response.body();
     }
 
     private void addCharacter(Character character) {

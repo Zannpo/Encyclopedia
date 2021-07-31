@@ -42,7 +42,7 @@ public class CharacterApi {
 
     }
 
-    @GetMapping("/getCharactersByName/{name}")
+    @GetMapping("/getCharacterByName/{name}")
     public Character getCharacterByName(@PathVariable("name") String name) {
         return listOfCharacters.stream().filter(item -> item.getName().equals(name)).findFirst().get();
 
